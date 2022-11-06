@@ -7,4 +7,5 @@ class Bot extends Player {
   Bot(super._name, super._chip);
 
   bool isBot() => _isBot;
+
 }

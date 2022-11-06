@@ -28,6 +28,9 @@ class Dealer {
     this._cards = this.generateCards(5, true);
   }
 
+  void raiseFlop(int value){
+    _flopValue += value;
+  }
 
   void startGame(Player player, Bot bot){
     print("\x1B[2J\x1B[0;0H");
@@ -37,20 +40,25 @@ class Dealer {
       bot
     ]);
     this.generateMyCards();
+    this.raiseFlop(bot.raise(100, true));
+    this.raiseFlop(player.raise(50, true));
 
     this.updateScreen(player, bot);
 
-    player.askRaise();
+    this.raiseFlop(player.raise(50, false));
+
   }
 
   void updateScreen(Player player, Bot bot){
     bot.showDetail();
     showCards(bot.getCards());
+    bot.showLastBet();
 
     print('\n\n\t\t\t\b\b\bFlop Value: ${this._flopValue} \$');
     showCards(this._cards);
     print('\n\n');
 
+    player.showLastBet();
     player.showDetail();
     showCards(player.getCards());
   }

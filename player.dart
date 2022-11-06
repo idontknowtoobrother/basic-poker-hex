@@ -6,6 +6,7 @@ class Player {
 
   late String _name;
   late int _chip;
+  late int _lastBet;
   bool _isBot = false;
 
   List<Card> _cards = [];
@@ -24,15 +25,27 @@ class Player {
   int getChip() => this._chip;
 
 
-  void askRaise(){
-    stdout.write('\n\$ Raise (C): ');
-    int? chipRaise = int.parse(stdin.readLineSync()!);
+  int raise(int value, bool isForce){
+    int _value;
+    if(isForce){
+      _value = value;
+    }else{
+      stdout.write('\n\$ Raise (C): ');
+      _value = int.parse(stdin.readLineSync()!);
+    }
+    this._chip -= _value;
+    this._lastBet = _value;
+    return _value;
   }
 
   void showDetail() {
     print('[\t\b\b\b\b${this._name}');
     print('[\t\b\b\b\bC: ${this._chip} \$');
   } 
+
+  void showLastBet(){
+    print('\n\t\t\tBet ( ${this._lastBet} ) \$\n');
+  }
 
 
 } 
