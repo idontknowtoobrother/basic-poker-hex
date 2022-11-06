@@ -38,25 +38,21 @@ class Dealer {
     ]);
     this.generateMyCards();
 
+    this.updateScreen(player, bot);
+
+    player.askRaise();
+  }
+
+  void updateScreen(Player player, Bot bot){
     bot.showDetail();
     showCards(bot.getCards());
 
-       
-  
-    this.showFirstRound();
-
-
-    player.showDetail();
-    showCards(player.getCards());
-
-    player.askRaise();
-
-  }
-
-  void showFirstRound(){
     print('\n\n\t\t\t\b\b\bFlop Value: ${this._flopValue} \$');
     showCards(this._cards);
     print('\n\n');
+
+    player.showDetail();
+    showCards(player.getCards());
   }
 
   List<Card> generateCards(int totalCards, bool isHide){
