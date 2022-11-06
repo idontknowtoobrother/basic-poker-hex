@@ -33,8 +33,7 @@ class Dealer {
   }
 
   void startGame(Player player, Bot bot){
-    print("\x1B[2J\x1B[0;0H");
-
+    
     this.givePlayerCards([
       player,
       bot
@@ -44,12 +43,12 @@ class Dealer {
     this.raiseFlop(player.raise(50, true));
 
     this.updateScreen(player, bot);
-
-    this.raiseFlop(player.raise(50, false));
-
+    this.raiseFlop(player.raise(0, false));
+    this.updateScreen(player, bot);
   }
 
   void updateScreen(Player player, Bot bot){
+    print("\x1B[2J\x1B[0;0H");
     bot.showDetail();
     showCards(bot.getCards());
     bot.showLastBet();
